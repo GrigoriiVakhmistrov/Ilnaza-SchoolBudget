@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AndrApp.Views.OperationsPage"
+             xmlns:vm="clr-namespace:AndrApp.ViewModels"
+             Title="Операции"
+             Background="{AppThemeBinding Light=White, Dark=#4444}"
+
+
+             xmlns:local="clr-namespace:AndrApp.ViewModels"
+             xmlns:model="clr-namespace:AndrApp.Models"
+             x:Name="BrowseItemsPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Добавить" Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
+    <!--
+      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+    -->
+    <RefreshView x:DataType="local:OperationsViewModel" Command="{Binding LoadOperationsCommand}"
+                 IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <CollectionView x:Name="ItemsListView"
+                        ItemsSource="{Binding Operations} "
+                        SelectionMode="Single" TabIndex="{Binding Sel ,Mode=TwoWay}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10" x:DataType="model:Operation">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Category}"
+                                   LineBreakMode="NoWrap" HorizontalOptions="Start"
+                                   Style="{DynamicResource ListItemTextStyle}"
+                                   FontSize="16" Grid.Column="0" />
+                            <Label Text=":" Grid.Column="1" HorizontalOptions="Start" />
+                            <Label Text="{Binding Name}"
+                                   LineBreakMode="NoWrap" HorizontalOptions="Start"
+                                   Style="{DynamicResource ListItemTextStyle}"
+                                   FontSize="16" Grid.Column="2" />
+                        </Grid>
+
+                        <Label Text="{Binding Aftconvert}"
+                               LineBreakMode="NoWrap"
+                               Style="{DynamicResource ListItemDetailTextStyle}"
+                               FontSize="13" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:OperationsViewModel}}, Path=ItemTapped}"
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>

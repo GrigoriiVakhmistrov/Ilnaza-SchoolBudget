@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AndrApp.Views.NewOperationPage"
+             xmlns:local="clr-namespace:AndrApp.ViewModels"
+             Title="{Binding Title}"
+             Background="{AppThemeBinding Light=White, Dark=#4444}">
+    <ContentPage.Content>
+        <StackLayout x:DataType="local:NewOperationViewModel"><!--   -->
+
+            <TableView>
+                <TableRoot>
+                    <TableSection>
+                        <EntryCell Label="Название:" x:Name="name" Text="{Binding Name,Mode=TwoWay}"></EntryCell>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Категория:" VerticalOptions="CenterAndExpand" Margin="15,0,0,0"
+                                       Grid.Column="0" />
+                                <Picker Grid.Column="1" x:Name="pic" SelectedIndexChanged="Picker_SelectedIndexChanged"
+                                        HorizontalOptions="FillAndExpand" ItemsSource="{Binding Categories}"
+                                        SelectedItem="{Binding Category,Mode=TwoWay}" />
+                            </Grid>
+                        </ViewCell>
+                        <EntryCell Label="Значение:" Keyboard="Numeric" Text="{Binding Value,Mode=TwoWay}"></EntryCell>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Валюта:" VerticalOptions="CenterAndExpand" Margin="15,0,0,0"
+                                       Grid.Column="0" />
+                                <Picker Grid.Column="1" HorizontalOptions="FillAndExpand" />
+
+                            </Grid>
+                        </ViewCell>
+
+                        <EntryCell IsEnabled="{Binding Editing}" Label="После перевода:" Keyboard="Numeric"
+                                   Text="{Binding Aftconvert,Mode=TwoWay}">
+                        </EntryCell>
+                        <SwitchCell On="{Binding Regular,Mode=TwoWay}" Text="Повтор:"></SwitchCell>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Дата,время:" VerticalOptions="CenterAndExpand" Margin="15,0,0,0"
+                                       Grid.Column="0" />
+                                <DatePicker Date="{Binding DateTime1,Mode=TwoWay}" Grid.Column="2"
+                                            HorizontalOptions="FillAndExpand" Format="d.M.yyyy" />
+                                <TimePicker Time="{Binding Time,Mode=TwoWay}" Grid.Column="1" />
+                            </Grid>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection Title="Место">
+                        <EntryCell x:Name="s1" Keyboard="Numeric" Label="Широта" Text="{Binding Latitude, Mode=TwoWay}" />
+                        <EntryCell x:Name="s2" Keyboard="Numeric" Label="Долгота"
+                                   Text="{Binding Longitude,Mode=TwoWay}" />
+                        <SwitchCell On="{Binding Selfgeo,Mode=TwoWay}" x:Name="selfgeo" OnChanged="selfgeo_OnChanged"
+                                    Text="Использовать текущее местоположение" />
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+
+                                </Grid.ColumnDefinitions>
+
+                                <Button Text="Сохранить" Command="{Binding AddItemCommand}" Grid.Column="0" />
+                            </Grid>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+
+            </TableView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

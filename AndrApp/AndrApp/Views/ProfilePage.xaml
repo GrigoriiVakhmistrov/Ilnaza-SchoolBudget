@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AndrApp.Views.ProfilePage"
+             xmlns:local="clr-namespace:AndrApp.ViewModels"
+             Title="Профиль"
+             Background="{AppThemeBinding Light=White, Dark=#4444}">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+
+            <TableView HasUnevenRows="True">
+                <TableRoot>
+                    <TableSection Title="Кошельки">
+                        <ViewCell Height="234">
+                            <ScrollView>
+                                <CollectionView x:Name="ItemsListView"
+                                                ItemsSource="{Binding Budgets}"
+                                                SelectionMode="Single">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout Padding="10" x:DataType="x:String">
+                                                <Label Text="{Binding .}"
+                                                       LineBreakMode="NoWrap"
+                                                       Style="{DynamicResource ListItemTextStyle}"
+                                                       FontSize="16" />
+
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        NumberOfTapsRequired="1"
+                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProfileViewModel}}, Path=Tapped}"
+                                                        CommandParameter="{Binding .}">
+                                                    </TapGestureRecognizer>
+                                                    <!--  -->
+                                                </StackLayout.GestureRecognizers>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </ScrollView>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection>
+                        <ViewCell>
+                            <Button Margin="10" Command="{Binding Add}" Text="Добавить"></Button>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

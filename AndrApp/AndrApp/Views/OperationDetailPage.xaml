@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AndrApp.Views.OperationDetailPage"
+             Background="{AppThemeBinding Light=White, Dark=#4444}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Удалить" Command="{Binding delthis}" />
+        <ToolbarItem Text="Изменить" Command="{Binding AddItemCommand}" />
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+
+        <TableView>
+            <TableRoot>
+                <TableSection>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Название:" Grid.Column="0" />
+                            <Label Text="{Binding Name}" Grid.Column="1" />
+                        </Grid>
+                    </ViewCell>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Категория:" Grid.Column="0" />
+                            <Label Text="{Binding Category}" Grid.Column="1" />
+                        </Grid>
+                    </ViewCell>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Значение:" Grid.Column="0" />
+                            <Label Text="{Binding Value }" Grid.Column="1" />
+                        </Grid>
+                    </ViewCell>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Валюта:" Grid.Column="0" />
+                            <Label Text="{Binding Currency }" Grid.Column="1" />
+                        </Grid>
+                    </ViewCell>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="После перевода:" Grid.Column="0" />
+                            <Label Text="{Binding  Aftconvert }" Grid.Column="1" />
+                        </Grid>
+
+                    </ViewCell>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Повтор:" Grid.Column="0" />
+                            <Label Text="{Binding  Regular }" Grid.Column="1" />
+                        </Grid>
+
+                    </ViewCell>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Время:" Grid.Column="0" />
+                            <Label Text="{Binding   DateTime1}" Grid.Column="1" />
+                        </Grid>
+
+                    </ViewCell>
+                    <ViewCell Height="200" Tapped="ViewCell_Tapped">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Место:" Grid.Column="0" />
+                            <Label Text="{Binding  Geo}" TextColor="Blue" TextDecorations="Underline" Grid.Column="1" />
+                        </Grid>
+
+                    </ViewCell>
+                </TableSection>
+
+            </TableRoot>
+
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

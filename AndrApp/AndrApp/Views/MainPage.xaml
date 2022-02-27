@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dxc="http://schemas.devexpress.com/xamarin/2014/forms/charts"
+             x:Class="AndrApp.Views.MainPage"
+             xmlns:local="clr-namespace:AndrApp.ViewModels"
+             Title="Главная"
+             Background="{AppThemeBinding Light=White, Dark=#4444}">
+    <ContentPage.Content>
+        <RefreshView Command="{Binding LoadCommand}" x:DataType="local:MainViewModel"
+                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <ScrollView>
+                <StackLayout Orientation="Vertical">
+                    <dxc:ChartView HeightRequest="400">
+                        <dxc:ChartView.Series>
+                            <dxc:BarSeries DisplayName="Доходы">
+                                <dxc:BarSeries.Data>
+                                    <dxc:SeriesDataAdapter
+                                        DataSource="{Binding IncomeData.Values}"
+                                        ArgumentDataMember="AxisXValue">
+                                        <dxc:ValueDataMember Type="Value" Member="Value" />
+                                    </dxc:SeriesDataAdapter>
+                                </dxc:BarSeries.Data>
+                            </dxc:BarSeries>
+                            <dxc:BarSeries DisplayName="Расходы">
+                                <dxc:BarSeries.Data>
+                                    <dxc:SeriesDataAdapter
+                                        DataSource="{Binding CostData.Values}"
+                                        ArgumentDataMember="AxisXValue">
+                                        <dxc:ValueDataMember Type="Value" Member="Value" />
+                                    </dxc:SeriesDataAdapter>
+                                </dxc:BarSeries.Data>
+                            </dxc:BarSeries>
+                        </dxc:ChartView.Series>
+                        <dxc:ChartView.Legend>
+                            <dxc:Legend HorizontalPosition="Center"
+                                        VerticalPosition="BottomOutside"
+                                        Orientation="TopToBottom" />
+                        </dxc:ChartView.Legend>
+                        <dxc:ChartView.Hint>
+                            <dxc:Hint />
+                        </dxc:ChartView.Hint>
+                        <dxc:ChartView.AxisX>
+                            <dxc:NumericAxisX>
+                                <dxc:NumericAxisX.Visible>False</dxc:NumericAxisX.Visible>
+                            </dxc:NumericAxisX>
+                        </dxc:ChartView.AxisX>
+                        <dxc:ChartView.AxisY>
+                            <dxc:NumericAxisY>
+                                <dxc:NumericAxisY.Title>
+                                    <dxc:AxisTitle Text="Рубли" />
+                                </dxc:NumericAxisY.Title>
+                                <dxc:NumericAxisY.Range>
+                                    <dxc:NumericRange VisualMin="0" />
+                                </dxc:NumericAxisY.Range>
+                            </dxc:NumericAxisY>
+                        </dxc:ChartView.AxisY>
+                    </dxc:ChartView>
+                    <Grid Margin="10,0,-57,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" FontSize="24">Бюджет:</Label>
+                        <Label Grid.Column="0" Grid.Row="1">Прибыль:</Label>
+                        <Label Grid.Column="1" Grid.Row="0" FontSize="24" Text="{Binding All}"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Prib}"></Label>
+                        <Label Grid.Column="0" Grid.Row="1">Прибыль:</Label>
+                        <Label Grid.Column="0" Grid.Row="2">За сегодня:</Label>
+                        <Label Grid.Column="1" Grid.Row="2" Text="{Binding Perday}"></Label>
+                        <Label Grid.Column="0" Grid.Row="3">Доход за сегодня:</Label>
+                        <Label Grid.Column="1" Grid.Row="3" Text="{Binding IncomePerDayString}"></Label>
+                        <Label Grid.Column="0" Grid.Row="4">Расход за сегодня:</Label>
+                        <Label Grid.Column="1" Grid.Row="4" Text="{Binding ConsumptionPerDayString}"></Label>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

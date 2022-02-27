@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AndrApp.Views.Auth"
+             Title="Вход"
+             Background="{AppThemeBinding Light=White, Dark=#4444}">
+    <ContentPage.Content>
+        <Grid>
+            <Grid VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="270">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" TextColor="{StaticResource Primary}" HorizontalOptions="End"
+                       VerticalOptions="Center">
+                    Логин:
+                </Label>
+                <Label TextColor="{StaticResource Primary}" Grid.Row="1" Grid.Column="0" HorizontalOptions="End"
+                       VerticalOptions="Center">
+                    Пароль:
+                </Label>
+                <Entry x:Name="LoginBox" Margin="5" Text="{Binding Login, Mode=TwoWay}"
+                       HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="1" />
+                <Entry x:Name="PassBox" Margin="5" Text="{Binding Password, Mode=TwoWay}" IsPassword="True"
+                       Grid.Row="1" Grid.Column="1" />
+                <ActivityIndicator x:Name="Loading" IsRunning="{Binding Loading}" Grid.Column="0" Grid.Row="2" />
+
+                <StackLayout Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="0" Grid.RowSpan="2">
+                    <Button x:Name="SignIn_Button" Margin="5" Grid.Row="3" Grid.ColumnSpan="2" Text="Войти"
+                            Command="{Binding EnterCommand}" TextColor="{StaticResource NegativePrim}" Grid.Column="0" />
+                    <Button Margin="5" Grid.Row="4" Grid.ColumnSpan="2" Text="Зарегистрироваться"
+                            TextColor="{StaticResource NegativePrim}" Grid.Column="0" />
+                </StackLayout>
+                <Label x:Name="er" TextColor="Red" Text="Неверно введен логин или пароль" HorizontalOptions="Start"
+                       Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" VerticalOptions="Start"
+                       IsVisible="{Binding Wrong}" />
+                <!--      -->   </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
